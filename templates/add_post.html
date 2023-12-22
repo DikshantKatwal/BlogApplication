@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% if user.is_superuser %}
+        <h2>Welcome, {{username}}</h2>
+        <p>Add New Blog Post</p>
+        <form method="post" action="{% url 'add-blog-post' %}" class="my-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+          </form>
+        
+    {% else %}
+    <h3>Welcome, Regular User! </h3>
+    <p>Please Log In First. </p>
+    <a href="{% url 'login' %}">
+        <button>Login</button>
+    </a>
+    {% endif %}
+
+
+    <style>
+        /* Basic styling for better appearance */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+  
+{% endblock %}
